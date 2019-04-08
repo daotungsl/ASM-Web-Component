@@ -23,8 +23,8 @@
 <%--<jsp:include page="register.jsp">--%>
 <%--    <jsp:param name="title" value="<%= title%>"/>--%>
 <%--    <jsp:param name="description" value="Mô tả"/>--%>
-<%--    <jsp:param name="keywords" value="keyword1, keyword2"/>--%>
 <%--</jsp:include>--%>
+
 <jsp:include page="include.jsp"/>
 <head><title>Register</title></head>
 

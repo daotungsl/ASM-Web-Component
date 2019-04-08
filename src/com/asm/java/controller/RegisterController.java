@@ -14,7 +14,9 @@ import java.util.HashMap;
 public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/register.jsp").forward(req,resp);
+        req.setCharacterEncoding("UTF-8");
+        req.setAttribute("title","Trang đăng kí");
+        req.getRequestDispatcher("register.jsp").forward(req,resp);
     }
 
     @Override
@@ -25,7 +27,6 @@ public class RegisterController extends HttpServlet {
         User user = new User(username,password);
         if (!user.isValid()){
             HashMap<String, ArrayList<String>> errors = user.getErrors();
-            req.setAttribute("title","Trang đăng kí");
             req.setAttribute("user",user);
             req.setAttribute("errors",errors);
             req.getRequestDispatcher("register.jsp").forward(req,resp);

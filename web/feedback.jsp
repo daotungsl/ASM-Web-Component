@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.asm.java.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: Daotu
   Date: 08/04/2019
@@ -6,6 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    HttpSession httpSession = request.getSession();
+    String username = (String) httpSession.getAttribute("loggedUser");
+//    if (user == null) {
+//        user = new User();
+//    }
+%>
 <html>
 <head>
     <title>Feedback</title>
@@ -25,7 +32,7 @@
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Username:</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%= username%>">
                 </div>
             </div>
             <div class="form-group">

@@ -19,15 +19,15 @@
     </div>
 
     <div class="col-6">
-        <form>
+        <form action="/login" method="post">
             <h1>Login form</h1>
             <div class="form-group ">
-                <label for="exampleInputEmail1">User name</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+                <label for="exampleInputUsername">User name</label>
+                <input type="text" class="form-control" name="username" id="exampleInputUsername"  placeholder="Enter username">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+                <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Enter password">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
