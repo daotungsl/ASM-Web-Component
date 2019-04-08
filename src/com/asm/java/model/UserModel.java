@@ -11,19 +11,22 @@ public class UserModel {
     private Connection connection;
     {
         try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/test?user=root$password= ");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/asm_web_component?user=root$password= ");
         }catch (SQLException e){
             e.printStackTrace();
         }
     }
 
     public boolean insertUser(User user){
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into Account(user)");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+//        try {
+////            PreparedStatement preparedStatement = connection.prepareStatement("insert into Account(user) ");
+////            preparedStatement.execute();
+//            return true;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+        System.out.println("ngon lành "+ user.getUsername());
+        return true;
     }
 
 }

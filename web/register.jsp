@@ -42,13 +42,15 @@
 
     <div class="form-group ">
         <label for="exampleInputUsername">User name</label>
-        <input type="text" class="form-control" id="exampleInputUsername"  placeholder="Enter username" value="<%= user.getUsername()%>">
+        <input type="text" class="form-control" name="username" id="exampleInputUsername"  placeholder="Enter username" value="<%= user.getUsername()%>">
         <% if (errors.containsKey("username")) {
             ArrayList<String> userNameError = errors.get("username");
             for (String error :
                     userNameError) {
         %>
-        <span class="msg-error"><%= error.indexOf("username")%></span>
+        <span class="text-danger">- <%= error%></span>
+        <br>
+
         <%
                 }
             }
@@ -56,9 +58,19 @@
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+        <% if (errors.containsKey("password")) {
+            ArrayList<String> passwordError = errors.get("password");
+            for (String error :
+                    passwordError) {
+        %>
+        <span class="text-danger">- <%= error%></span>
+        <br>
+        <%
+                }
+            }
+        %>
     </div>
-    <input type="button" class="btn btn-primary" value="Submit">
     <button type="submit" class="btn btn-primary">Submit</button>
     <button type="reset" class="btn ">Reset</button>
 

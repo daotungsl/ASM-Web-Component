@@ -14,7 +14,7 @@ public class User {
     HashMap<String, ArrayList<String>> errors = new HashMap<>();
 
     public User() {
-        username = "";
+        this.username = "";
     }
 
     public User(String username, String password, List<Feedback> feedbackList, int role, int status) {
@@ -118,6 +118,7 @@ public class User {
         }
         if (this.password == null || this.password.length() == 0) {
             passwordError.add("Password is required!!!");
+
         }
         if (this.password.length() < 2 || this.password.length() > 30) {
             passwordError.add("Password must be between 6 and 8 character");
