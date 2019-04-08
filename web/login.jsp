@@ -9,30 +9,35 @@
 <%%>
 <html>
 <head><title>Login</title></head>
+<jsp:include page="include.jsp"/>
 <body>
 
+<%--<jsp:include page="login.jsp"/>--%>
+<div class="container ">
+    <div class="col-3">
 
-<h1>Login</h1>
+    </div>
 
+    <div class="col-6">
+        <form>
+            <h1>Login form</h1>
+            <div class="form-group ">
+                <label for="exampleInputEmail1">User name</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+            </div>
 
-<h3>Enter user name and password:</h3>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn ">Reset</button>
 
-<form name='f' action=/login method='POST'>
-    <table>
-        <tr>
-            <td>User:</td>
-            <td><input type='text' name='username' value=''></td>
+        </form>
+    </div>
+    <div class="col-3">
 
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password' /></td>
-        </tr>
-        <tr>
-            <td><input name="submit" type="submit" value="submit" /></td>
-            <td><input name="reset" type="reset" value="reset" /></td>
-        </tr>
-    </table>
-</form>
+    </div>
+</div>
 </body>
 </html>

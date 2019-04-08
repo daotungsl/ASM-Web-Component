@@ -20,41 +20,56 @@
     }
 %>
 <html>
-<jsp:include page="register.jsp">
-    <jsp:param name="title" value="<%= title%>"/>
-    <jsp:param name="description" value="Mô tả"/>
-    <jsp:param name="keywords" value="keyword1, keyword2"/>
+<%--<jsp:include page="register.jsp">--%>
+<%--    <jsp:param name="title" value="<%= title%>"/>--%>
+<%--    <jsp:param name="description" value="Mô tả"/>--%>
+<%--    <jsp:param name="keywords" value="keyword1, keyword2"/>--%>
+<%--</jsp:include>--%>
+<jsp:include page="include.jsp"/>
+<head><title>Register</title></head>
 
-
-</jsp:include>
-<head><title>Login</title></head>
 <body>
 
-<jsp:include page="login.jsp"/>
-<div class="content">
-    <h1><%= (String) request.getAttribute("title")%>
-    </h1>
-    <fieldset>
-        <legend>Register form</legend>
-        <form action="/user" method="post">
-            Username <input type="text" name="username" value="<%= user.getUsername()%>">
-            <% if (errors.containsKey("username")) {
-                ArrayList<String> userNameError = errors.get("username");
-                for (String error :
-                        userNameError) {
-                    %>
-                    <span class="msg-error"><%= error.get("username")%></span>
-                    <%
-                    }
-                }
-            %>
-            <br>
-            <input name="submit" type="submit" value="submit"/>
-            <br>
-            <input name="reset" type="reset" value="reset"/>
-        </form>
-    </fieldset>
+<%--<jsp:include page="login.jsp"/>--%>
+<div class="container ">
+<div class="col-3">
+
 </div>
 
+<div class="col-6">
+    <h1>Register form</h1>
+<form action="/register" method="post">
+
+    <div class="form-group ">
+        <label for="exampleInputUsername">User name</label>
+        <input type="text" class="form-control" id="exampleInputUsername"  placeholder="Enter username" value="<%= user.getUsername()%>">
+        <% if (errors.containsKey("username")) {
+            ArrayList<String> userNameError = errors.get("username");
+            for (String error :
+                    userNameError) {
+        %>
+        <span class="msg-error"><%= error.indexOf("username")%></span>
+        <%
+                }
+            }
+        %>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+    </div>
+    <input type="button" class="btn btn-primary" value="Submit">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn ">Reset</button>
+
+</form>
+
+</div>
+<div class="col-3">
+
+</div>
+</div>
 </body>
+
+
 </html>
