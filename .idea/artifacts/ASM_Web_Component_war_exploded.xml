@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ASM-Web-Component:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ASM_Web_Component_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ASM-Web-Component/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ASM-Web-Component" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
