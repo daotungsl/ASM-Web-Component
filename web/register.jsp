@@ -1,5 +1,5 @@
 <%@ page import="java.util.HashMap" %>
-<%@ page import="com.sample.java.entity.User" %>
+<%@ page import="com.asm.java.entity.User" %>
 <%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Daotu

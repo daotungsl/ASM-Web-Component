@@ -4,14 +4,16 @@ public class Feedback {
     private int id;
     private String content;
     private int user_id;
+    private int status;
 
     public Feedback() {
     }
 
-    public Feedback(int id, String content, int user_id) {
+    public Feedback(int id, String content, int user_id, int status) {
         this.id = id;
         this.content = content;
         this.user_id = user_id;
+        this.status = status;
     }
 
     public int getId() {
@@ -36,5 +38,13 @@ public class Feedback {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
