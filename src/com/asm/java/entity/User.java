@@ -1,19 +1,32 @@
 package com.asm.java.entity;
 
+import java.util.List;
+
 public class User {
     private int id;
     private String username;
     private String password;
+    private List<Feedback> feedbackList;
     private int role;
+    private int status;
 
     public User() {
     }
 
-    public User(int id, String username, String password, int role) {
-        this.id = id;
+    public User(String username, String password, List<Feedback> feedbackList, int role, int status) {
         this.username = username;
         this.password = password;
+        this.feedbackList = feedbackList;
         this.role = role;
+        this.status = status;
+    }
+
+    public List<Feedback> getFeedbackList() {
+        return feedbackList;
+    }
+
+    public void setFeedbackList(List<Feedback> feedbackList) {
+        this.feedbackList = feedbackList;
     }
 
     public int getId() {
@@ -46,5 +59,13 @@ public class User {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
