@@ -1,4 +1,6 @@
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asm.java.entity.Feedback" %>
+<%@ page import="com.asm.java.model.FeedbackModel" %><%--
   Created by IntelliJ IDEA.
   User: Daotu
   Date: 08/04/2019
@@ -7,11 +9,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    FeedbackModel feedbackModel = new FeedbackModel();
+
     HttpSession httpSession = request.getSession();
     String username = (String) httpSession.getAttribute("loggedUser");
-    int status = (int) request.getAttribute("status");
-    int role = (int) request.getAttribute("role");
-    ArrayList<String> listFeedback = (ArrayList<String>) request.getAttribute("listfeedback");
+    int userId = (int) httpSession.getAttribute("userId");
+    ArrayList<Feedback> listFeedback = feedbackModel.getListFeedbackByUserId(userId);
 
 %>
 <html>
@@ -46,12 +49,7 @@
         <h1>Feedback form</h1>
         <h3>Username: <%= username%>
         </h3>
-        <h3>role: <%
-            if (role == 0) {
-        %> user<%
-        } else {
-        %> admin<%
-            }%></h3>
+        <h3>role: user</h3>
 
         <table class="table table-striped">
             <thead>
@@ -63,18 +61,18 @@
             </thead>
             <tbody>
             <%
-                for (String content :
+                for (Feedback feedback :
                         listFeedback) {
 
             %>
             <tr>
-                <th scope="row"><%= status%>
+                <th scope="row"><%= feedback.getId()%>
                 </th>
-                <td><%= content%>
+                <td><%= feedback.getContent()%>
                 </td>
                 <td style="display: inline-grid">
                     <%
-                        if (status == 1) {
+                        if (feedback.getStatus() == 1) {
                     %>
                     <button style="color: #007bff" class="btn" disabled><i class="fa fa-check"></i></button>
                     <%

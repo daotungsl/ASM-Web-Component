@@ -1,7 +1,8 @@
 package com.asm.java.controller;
 
 import com.asm.java.entity.Feedback;
-import com.asm.java.model.UserModel;
+import com.asm.java.model.FeedbackModel;
+import com.asm.java.model.UserModels;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,13 +18,15 @@ public class FeedbackController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         req.setAttribute("title","Trang feedback");
-
         req.getRequestDispatcher("/feedback.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        HttpSession httpSession = req.getSession();
+        int userId = (int) httpSession.getAttribute("userId");
+        System.out.println(userId);
         String content = req.getParameter("content");
 
         Feedback feedback = new Feedback(content);
@@ -39,8 +42,8 @@ public class FeedbackController extends HttpServlet {
 
             req.getRequestDispatcher("feedback.jsp").forward(req,resp);
         }
-        UserModel userModel = new UserModel();
-        userModel.insertFeedback(feedback);
+        FeedbackModel feedbackModel = new FeedbackModel();
+        feedbackModel.addFeedback(content,userId);
         resp.sendRedirect("/listfeedback");
 
     }

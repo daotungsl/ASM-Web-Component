@@ -5,8 +5,10 @@ import java.util.HashMap;
 
 public class Feedback {
     private int id;
+    private int userId;
     private String content;
-    private int user_id;
+    private long createdAt;
+    private long updatedAt;
     private int status;
     HashMap<String, ArrayList<String>> errors = new HashMap<>();
 
@@ -18,16 +20,31 @@ public class Feedback {
         this.content = content;
     }
 
-    public Feedback(String content, int user_id, int status) {
+    public Feedback(int id, int userId, String content, long createdAt, long updatedAt, int status) {
+        this.id = id;
+        this.userId = userId;
         this.content = content;
-        this.user_id = user_id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.status = status;
     }
 
-    public Feedback(int id, String content, int user_id, int status) {
-        this.id = id;
+    public Feedback(int userId, String content, long createdAt, long updatedAt, int status) {
+        this.userId = userId;
         this.content = content;
-        this.user_id = user_id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.status = status;
+    }
+
+    public Feedback(int userId, String content) {
+        this.userId = userId;
+        this.content = content;
+    }
+
+    public Feedback( String content, long updatedAt, int status) {
+        this.content = content;
+        this.updatedAt = updatedAt;
         this.status = status;
     }
 
@@ -39,6 +56,15 @@ public class Feedback {
         this.id = id;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+
     public String getContent() {
         return content;
     }
@@ -47,12 +73,20 @@ public class Feedback {
         this.content = content;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public long getCreatedAt() {
+        return createdAt;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public int getStatus() {

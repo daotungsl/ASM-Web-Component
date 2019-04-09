@@ -21,6 +21,7 @@ public class MyFilter implements Filter {
         String username = (String) httpSession.getAttribute("loggedUser");
         if (username != null && username.length() > 0) {
             httpServletRequest.setAttribute("loggedIn", username);
+            System.out.println(httpServletRequest.getSession().getAttribute("userId"));
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
