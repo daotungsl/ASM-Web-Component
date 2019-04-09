@@ -1,5 +1,7 @@
 package com.asm.java.entity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User {
@@ -9,8 +11,10 @@ public class User {
     private List<Feedback> feedbackList;
     private int role;
     private int status;
+    HashMap<String, ArrayList<String>> errors = new HashMap<>();
 
     public User() {
+        this.username = "";
     }
 
     public User(String username, String password, List<Feedback> feedbackList, int role, int status) {
@@ -19,6 +23,18 @@ public class User {
         this.feedbackList = feedbackList;
         this.role = role;
         this.status = status;
+    }
+
+    public User(String username, String password, int role, int status) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.status = status;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public List<Feedback> getFeedbackList() {
@@ -67,5 +83,63 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public boolean isValid() {
+        validate();
+        return this.errors.size() == 0;
+    }
+
+
+    private static boolean isNumber(String string) {
+        return string.matches(".*[0-9].*");
+    }
+
+    private static boolean isString(String string) {
+        return string.matches(".*[a-zA-Z].*");
+    }
+
+
+    private void validate() {
+        if (this.errors == null) {
+            this.errors = new HashMap<>();
+        }
+        ArrayList<String> userNameError = this.errors.get("username");
+        ArrayList<String> passwordError = this.errors.get("password");
+
+        if (userNameError == null) {
+            userNameError = new ArrayList<>();
+        }
+        if (this.username == null || this.username.length() == 0) {
+            userNameError.add("Username is required!!!");
+        }
+        if (this.username.length() < 2 || this.username.length() > 30) {
+            userNameError.add("Username must be between 2 and 30 character");
+        }
+        if (userNameError.size() > 0) {
+            this.errors.put("username", userNameError);
+        }
+
+        if (passwordError == null) {
+            passwordError = new ArrayList<>();
+        }
+        if (this.password == null || this.password.length() == 0) {
+            passwordError.add("Password is required!!!");
+
+        }
+        if (this.password.length() < 2 || this.password.length() > 30) {
+            passwordError.add("Password must be between 6 and 8 character");
+        }
+        if (!isNumber(this.password) && !isString(this.password)) {
+            passwordError.add("Password must have character and number");
+        }
+
+        if (passwordError.size() > 0) {
+            this.errors.put("password", passwordError);
+        }
+    }
+
+    public HashMap<String, ArrayList<String>> getErrors() {
+        return this.errors;
     }
 }
