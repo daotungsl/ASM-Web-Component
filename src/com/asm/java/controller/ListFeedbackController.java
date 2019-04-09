@@ -8,17 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class AdminController extends HttpServlet {
+public class ListFeedbackController extends HttpServlet {
     UserModel userModel = new UserModel();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        req.setAttribute("status",1);
-        ArrayList<String> listFeedback = userModel.getFeedbackByUserId(1);
+      ArrayList<String> listFeedback = userModel.getFeedbackByUserId(1);
+        req.setAttribute("status",0);
+        req.setAttribute("role",0);
         req.setAttribute("listfeedback",listFeedback);
-        req.getRequestDispatcher("/admin.jsp").forward(req,resp);
-
+        req.getRequestDispatcher("listFeedback.jsp").forward(req,resp);
     }
+
+
 }

@@ -15,7 +15,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/login.jsp").forward(req,resp);
+        req.getRequestDispatcher("/login.jsp").forward(req, resp);
     }
 
     @Override
@@ -31,17 +31,25 @@ public class LoginController extends HttpServlet {
             // không ai lưu cookie thế này, ngoài thầy.
             HttpSession session = req.getSession();
             session.setAttribute("loggedUser", user.getUsername());
+            session.setAttribute("role", user.getRole());
             System.out.println("Logged in sucess !!!");
-            resp.sendRedirect("/feedback");
+            System.out.println(session.getAttribute("role"));
+            if (user.getRole() == 1) {
+                resp.sendRedirect("/admin");
+
+            }else {
+                resp.sendRedirect("/feedback");
+            }
         } else {
             resp.getWriter().println("Sai thông tin tài khoản.");
         }
 
 
     }
-    private User checkLogin(String username, String password){
-        User user = userModel.getUserByUserNameAndPassword(username,password);
-        if (user != null){
+
+    private User checkLogin(String username, String password) {
+        User user = userModel.getUserByUserNameAndPassword(username, password);
+        if (user != null) {
             return user;
         }
         return null;

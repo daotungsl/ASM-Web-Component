@@ -31,12 +31,12 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>AdminForm</servlet-name>
-        <servlet-class>com.asm.java.controller.AdminController</servlet-class>
+        <servlet-name>ListFeedback</servlet-name>
+        <servlet-class>com.asm.java.controller.ListFeedbackController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AdminForm</servlet-name>
-        <url-pattern>/admin</url-pattern>
+        <servlet-name>ListFeedback</servlet-name>
+        <url-pattern>/listfeedback</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -47,4 +47,35 @@
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/feedback</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/listfeedback</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AuthenticationAdminFilter</filter-name>
+        <filter-class>com.asm.java.filter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationAdminFilter</filter-name>
+        <url-pattern>/admin</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>SecurityController</servlet-name>
+        <servlet-class>com.asm.java.controller.SecurityController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SecurityController</servlet-name>
+        <url-pattern>/security</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>com.asm.java.controller.AdminController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
 </web-app>
