@@ -31,9 +31,13 @@
 
     /* Darker background on mouse-over */
     .btn:hover {
-        background-color: #5a6268;
+        background-color: #c7c3cc;
     }
+
+
 </style>
+
+
 <body>
 
 <div class="container ">
@@ -53,6 +57,23 @@
         %> user<%
             }%></h3>
 
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Are you sure?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you really want to delete these records? This process cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="container">
             <ul class="nav nav-tabs">
@@ -93,7 +114,7 @@
                                 <%
                                     }
                                 %>
-                                <button style="color: #b21f2d" class="btn"><i class="fa fa-trash"></i></button>
+                                <button style="color: #b21f2d" href="#myModal" class="btn fa fa-trash trigger-btn" data-toggle="modal"></button>
                             </td>
                         </tr>
                         <%
@@ -105,6 +126,43 @@
                 </div>
                 <%--                menu feedback--%>
                 <div id="menu1" class="tab-pane fade">
+
+
+                    <!-- The Modal  edit-->
+                    <div class="modal fade" id="editModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Change Role</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form action="/action_page.php">
+                                        <div class="form-group">
+                                            <label for="sel1">Select role:</label>
+                                            <select class="form-control" id="sel1" name="sellist1">
+                                                <option value="0">User</option>
+                                                <option value="1">Admin</option>
+
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-primary">Cancel</button>
+                                    </form>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -134,18 +192,9 @@
                                 }%>
                             </td>
                             <td style="display: inline-grid">
-                                <%
-                                    if (status == 1) {
-                                %>
-                                <button  style="color: #007bff" class="btn fa fa-check" disabled></button>
-                                <%
-                                } else {
-                                %>
-                                <button style="color: #ff6528" class="btn fa fa-bomb" disabled></button>
-                                <%
-                                    }
-                                %>
-                                <button style="color: #b21f2d" class="btn fa fa-trash"></button>
+                                <button style="color: #484cb2" type="button" class="btn fa fa-edit" data-toggle="modal" data-target="#editModal">
+                                </button>
+
                             </td>
                         </tr>
                         <%
