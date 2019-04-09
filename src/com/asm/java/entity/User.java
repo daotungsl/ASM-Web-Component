@@ -8,21 +8,19 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private List<Feedback> feedbackList;
+    private String salt;
     private int role;
     private int status;
-    HashMap<String, ArrayList<String>> errors = new HashMap<>();
+    HashMap<String,ArrayList<String>> errors = new HashMap<>();
+
 
     public User() {
         this.username = "";
     }
 
-    public User(String username, String password, List<Feedback> feedbackList, int role, int status) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.feedbackList = feedbackList;
-        this.role = role;
-        this.status = status;
     }
 
     public User(String username, String password, int role, int status) {
@@ -32,17 +30,20 @@ public class User {
         this.status = status;
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String salt, int role, int status) {
         this.username = username;
         this.password = password;
+        this.salt = salt;
+        this.role = role;
+        this.status = status;
     }
 
-    public List<Feedback> getFeedbackList() {
-        return feedbackList;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setFeedbackList(List<Feedback> feedbackList) {
-        this.feedbackList = feedbackList;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public int getId() {
@@ -84,7 +85,6 @@ public class User {
     public void setStatus(int status) {
         this.status = status;
     }
-
     public boolean isValid() {
         validate();
         return this.errors.size() == 0;
@@ -130,9 +130,9 @@ public class User {
         if (this.password.length() < 2 || this.password.length() > 30) {
             passwordError.add("Password must be between 6 and 8 character");
         }
-        if (!isNumber(this.password) && !isString(this.password)) {
-            passwordError.add("Password must have character and number");
-        }
+//        if (!isNumber(this.password) && !isString(this.password)) {
+//            passwordError.add("Password must have character and number");
+//        }
 
         if (passwordError.size() > 0) {
             this.errors.put("password", passwordError);

@@ -1,7 +1,8 @@
 package com.asm.java.controller;
 
 import com.asm.java.entity.User;
-import com.asm.java.model.UserModel;
+import com.asm.java.model.UserModels;
+import com.asm.java.security.Security;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginController extends HttpServlet {
-    private UserModel userModel = new UserModel();
+    private UserModels userModel = new UserModels();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,8 +33,8 @@ public class LoginController extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("loggedUser", user.getUsername());
             session.setAttribute("role", user.getRole());
+            session.setAttribute("userId", user.getId());
             System.out.println("Logged in sucess !!!");
-            System.out.println(session.getAttribute("role"));
             if (user.getRole() == 1) {
                 resp.sendRedirect("/admin");
 
@@ -48,8 +49,11 @@ public class LoginController extends HttpServlet {
     }
 
     private User checkLogin(String username, String password) {
-        User user = userModel.getUserByUserNameAndPassword(username, password);
-        if (user != null) {
+        Security security = new Security();
+        User user = userModel.getUserByUserName(username);
+        System.out.println(user);
+        String passwordLogin= security.endcodeMd5(password)+user.getSalt();
+        if (passwordLogin.equals(user.getPassword())){
             return user;
         }
         return null;
