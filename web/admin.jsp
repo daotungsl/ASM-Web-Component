@@ -1,4 +1,8 @@
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.asm.java.entity.Feedback" %>
+<%@ page import="com.asm.java.model.FeedbackModel" %>
+<%@ page import="com.asm.java.model.UserModels" %>
+<%@ page import="com.asm.java.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: Daotu
   Date: 08/04/2019
@@ -8,10 +12,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     HttpSession httpSession = request.getSession();
+    FeedbackModel feedbackModel = new FeedbackModel();
+    UserModels userModels = new UserModels();
     String username = (String) httpSession.getAttribute("loggedUser");
     Integer status = (Integer) request.getAttribute("status");
     Integer role = (Integer) httpSession.getAttribute("role");
-    ArrayList<String> listFeedback = (ArrayList<String>) request.getAttribute("listfeedback");
+    ArrayList<Feedback> listFeedback =  feedbackModel.getListFeedbacks();
+    ArrayList<User> listUser =  userModels.getListUser();
 
 %>
 <html>
@@ -87,24 +94,27 @@
                         <thead>
                         <tr>
                             <th scope="col">id</th>
+                            <th scope="col">Create time</th>
                             <th scope="col">Feedback</th>
                             <th scope="col">Handle</th>
                         </tr>
                         </thead>
                         <tbody>
                         <%
-                            for (String content :
+                            for (Feedback feedback :
                                     listFeedback) {
 
                         %>
                         <tr>
-                            <th scope="row"><%= status%>
+                            <th scope="row"><%= feedback.getId()%>
                             </th>
-                            <td><%= content%>
+                            <td><%= feedback.getCreatedAt()%>
+                            </td>
+                            <td><%= feedback.getContent()%>
                             </td>
                             <td style="display: inline-grid">
                                 <%
-                                    if (status == 1) {
+                                    if (feedback.getStatus() == 1) {
                                 %>
                                 <button style="color: #007bff" class="btn" disabled><i class="fa fa-check"></i></button>
                                 <%
@@ -174,18 +184,18 @@
                         </thead>
                         <tbody>
                         <%
-                            for (String content :
-                                    listFeedback) {
+                            for (User user :
+                                    listUser) {
 
                         %>
                         <tr>
-                            <th scope="row"><%= status%>
+                            <th scope="row"><%= user.getId()%>
                             </th>
-                            <td><%= content%>
+                            <td><%= user.getUsername()%>
                             </td>
                             <td>
                                 <%
-                                    if (role == 1) {
+                                    if (user.getRole() == 1) {
                                 %> admin<%
                             } else {
                             %> user<%
